@@ -1,5 +1,5 @@
-package MainPackage;
+// package MainPackage;
 
-public @interface Mock {
+// public @interface Mock {
 
-}
+// }
