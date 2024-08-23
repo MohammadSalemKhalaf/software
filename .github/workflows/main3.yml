@@ -1,9 +1,9 @@
-name: SonarCloud
+name: Build and Analyze
 
 on:
   push:
     branches:
-      - master  # Update branch name if needed
+      - master
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -53,3 +53,4 @@ jobs:
             -Dsonar.organization=sweet2024m
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
