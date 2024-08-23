@@ -98,12 +98,12 @@ public class User {
         }
     }
     public void purchaseProduct(String productName, int quantity) {
-//        if (currentUsername == null || currentUsername.isEmpty()) {
-//            System.out.println("No user is currently logged in.");
-//            return;
-//        }
-        MyApp app = null;
-    	currentUsername=app.loggedName;
+ if (app == null) {
+            System.out.println("The app object is not initialized.");
+            return;
+        }
+        
+        String currentUsername = app.loggedName;
         // Step 1: Check if the product exists in the products file
         boolean productAvailable = false;
         try (BufferedReader productReader = new BufferedReader(new FileReader(PRODUCTS_FILE_PATH))) {
