@@ -129,6 +129,9 @@ public class MyApp {
                 filePath = FILE_ADMIN;
                 admin.add(new Admin(username, password));
                 break;
+			default:
+            System.err.println("Error: Unrecognized role '" + role + "'.");
+            return;  // Exit the method if the role is not recognized
         }
 
         updateFile(filePath, username, password, false);
