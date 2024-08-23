@@ -44,6 +44,7 @@ jobs:
         run: mvn --batch-mode test
 
       - name: SonarCloud Scan
+        if: always()  # Ensure SonarCloud scan runs even if tests fail
         uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
