@@ -134,7 +134,7 @@ public class MyApp {
                 admin.add(new Admin(username, password));
                 break;
             default:
-                System.err.println("Error: Unrecognized role '" + role + "'.");
+               // System.err.println("Error: Unrecognized role '" + role + "'.");
                 return;  
         }
 
@@ -193,8 +193,10 @@ public class MyApp {
             case "Admin":
                 found = loginAdmin(username, password);
                 break;
+            default:
+                System.err.println("Error: Unrecognized role '" + role + "'");
+                throw new IllegalArgumentException("Invalid role: " + role);
         }
-
         if (found) {
             openUserDash();
             loggedName = username;
