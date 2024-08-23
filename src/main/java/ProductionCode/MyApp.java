@@ -108,8 +108,12 @@ public class MyApp {
             case "Admin":
                 this.admin.add(new Admin(name, password));
                 break;
+            default:
+                System.err.println("Error: Unrecognized role '" + role + "'.");
+                break;
         }
     }
+
 
     public void SignUp(String username, String password, String role) {
         switch (role) {
@@ -129,9 +133,9 @@ public class MyApp {
                 filePath = FILE_ADMIN;
                 admin.add(new Admin(username, password));
                 break;
-			default:
-            System.err.println("Error: Unrecognized role '" + role + "'.");
-            return;  // Exit the method if the role is not recognized
+            default:
+                System.err.println("Error: Unrecognized role '" + role + "'.");
+                return;  
         }
 
         updateFile(filePath, username, password, false);
@@ -361,7 +365,6 @@ public class MyApp {
         switch (option) {
             case "1":
                 userManagementPageOpen = true;
-
                 System.out.println("User Management Page is now open.");
                 System.out.println("Options:");
                 System.out.println("1. View All Users");
@@ -369,22 +372,24 @@ public class MyApp {
                 System.out.println("3. Delete User");
                 System.out.println("4. Update User");
                 System.out.println("5. Back to Admin Dashboard");
-
                 break;
             case "2":
                 MonitorAndReport();
                 break;
             case "3":
-            	   contentManagementPageOpen = true;
-            	   
-            	   System.out.println("1. View Recipe");
-                   System.out.println("2. Delete Recipe");
-                   System.out.println("3. View feedback");
-                   System.out.println("4. Respond feedback");
-                   System.out.println("5. Delete feedback");
-            	   break;
+                contentManagementPageOpen = true;
+                System.out.println("1. View Recipe");
+                System.out.println("2. Delete Recipe");
+                System.out.println("3. View feedback");
+                System.out.println("4. Respond feedback");
+                System.out.println("5. Delete feedback");
+                break;
+            default:
+                System.err.println("Error: Unrecognized option '" + option + "'.");
+                break;
         }
     }
+
 
     public void AdminDashboardpage() {
         adminDashbordOpen = true;
@@ -587,7 +592,7 @@ public class MyApp {
             updateUser(loggedName, accName, password);
         }
     }
-
+ 
     public void listOrders() throws FileNotFoundException, IOException {
         loadOrders();  // Ensure the latest orders are loaded from the file
         System.out.println("Order List:");
@@ -665,37 +670,39 @@ public class MyApp {
         return currentPage.equals(page);
     }
 
-	public void selectReport(String profitReports) throws FileNotFoundException, IOException {
-		// TODO Auto-generated method stub
-		if (profitReports.equals("Profit Reports")) {
-			 try (BufferedReader br = new BufferedReader(new FileReader("files/purchasedProducts.txt"))) {
-		            String line;
-		            double TotalSales = 0;
-		            double Profit = 0;
-		            int quantity = 0;
-		            while ((line = br.readLine()) != null) {
-		                String[] parts = line.split(",");
-		                if (parts.length == 3) {
-		                    String purchasedName = parts[0];
-		                    String quan = parts[1];
-		                    String purchasedPrice = parts[2];
-		                    TotalSales += (Double.parseDouble(purchasedPrice) * Double.parseDouble(quan));
-		                    quantity += Double.parseDouble(quan);
-		                }
-		            }
-		            Profit = TotalSales - quantity * 50;
-		            System.out.println("The profit is: " + Profit);
-		            reportGenerated = true;
-		        }
-		reportShown=true;
-		}
-		if (profitReports.equals("Generate Financial Report")) {
-			this.getSalesReport();
-		}
-		
-		
-		
-	}
+    public void selectReport(String profitReports) throws FileNotFoundException, IOException {
+        switch (profitReports) {
+            case "Profit Reports":
+                try (BufferedReader br = new BufferedReader(new FileReader("files/purchasedProducts.txt"))) {
+                    String line;
+                    double TotalSales = 0;
+                    double Profit = 0;
+                    int quantity = 0;
+                    while ((line = br.readLine()) != null) {
+                        String[] parts = line.split(",");
+                        if (parts.length == 3) {
+                            String purchasedName = parts[0];
+                            String quan = parts[1];
+                            String purchasedPrice = parts[2];
+                            TotalSales += (Double.parseDouble(purchasedPrice) * Double.parseDouble(quan));
+                            quantity += Double.parseDouble(quan);
+                        }
+                    }
+                    Profit = TotalSales - quantity * 50;
+                    System.out.println("The profit is: " + Profit);
+                    reportGenerated = true;
+                }
+                reportShown = true;
+                break;
+            case "Generate Financial Report":
+                this.getSalesReport();
+                break;
+            default:
+                System.err.println("Error: Unrecognized report type '" + profitReports + "'.");
+                break;
+        }
+    }
+
 	public String getCurrentUsername() {
 		return loggedName;
 	}
