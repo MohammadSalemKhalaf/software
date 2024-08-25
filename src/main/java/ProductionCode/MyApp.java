@@ -437,7 +437,7 @@ public class MyApp {
             Files.write(Paths.get("files/products.txt"), updatedLines);
             System.out.println("File has been updated successfully.");
         } catch (IOException e) {
-            e.printStackTrace();
+    //        e.printStackTrace();
         }
     }
 
@@ -549,7 +549,7 @@ public class MyApp {
             System.out.println("Message sent successfully.");
             messageSentToUser = true;
         } catch (IOException e) {
-            e.printStackTrace();
+     //       e.printStackTrace();
         }
     }
 
@@ -563,7 +563,7 @@ public class MyApp {
             System.out.println("Message sent successfully.");
             messageSentToSupplier = true;
         } catch (IOException e) {
-            e.printStackTrace();
+     //       e.printStackTrace();
         }
     }
 
@@ -577,7 +577,7 @@ public class MyApp {
             System.out.println("Message sent successfully.");
             messageSentToSupplier = true;
         } catch (IOException e) {
-            e.printStackTrace();
+  //          e.printStackTrace();
         }
     }
 
