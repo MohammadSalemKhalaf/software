@@ -14,8 +14,7 @@ public class MyApp {
     private static final String FILE_STORE_OWNERS = "files/store_owners.txt";
     private static final String FILE_MATERIAL_SUPPLIERS = "files/material_suppliers.txt";
     private static final String FILE_ADMIN = "files/admin.txt";
-    private static final String FILE_PRODUCTS = "files/products.txt";
-    private static final String FILE_ORDERS = "files/orders.txt";
+
     private static final String PRINT_MESSAGE ="Material_supplier";
     // Instance variables
     private String filePath = "";
