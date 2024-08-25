@@ -88,7 +88,7 @@ public class MyApp {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+     //       e.printStackTrace();
         }
     }
 
@@ -437,7 +437,7 @@ public class MyApp {
             Files.write(Paths.get("files/products.txt"), updatedLines);
             System.out.println("File has been updated successfully.");
         } catch (IOException e) {
-            e.printStackTrace();
+      //      e.printStackTrace();
         }
     }
 
