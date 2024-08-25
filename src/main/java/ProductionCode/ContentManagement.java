@@ -74,7 +74,7 @@ public class ContentManagement {
     private void handleException(IOException e, String message) {
         // Log the error and notify the user
         System.err.println(message);
-        e.printStackTrace();
+      //  e.printStackTrace();
         JOptionPane.showMessageDialog(null, message);
     }
 
