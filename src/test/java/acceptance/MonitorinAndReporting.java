@@ -33,11 +33,11 @@ MyApp app;
 	        assertTrue(app.isUserLoggedIn);
 		app.navigateTo("reporting page");
 	}
-	@When("I select {string}")
-	public void i_select(String ReportType) throws FileNotFoundException, IOException {
-	 
-		app.selectReport(ReportType); 
-	  }
+//	@When("I select {string}")
+//	public void i_select(String ReportType) throws FileNotFoundException, IOException {
+//	 
+//		app.selectReport(ReportType); 
+//	  }
 	@Then("I should see a report of profits")
 	public void i_should_see_a_report_of_profits() {
 	  assertTrue(app.reportShown);
