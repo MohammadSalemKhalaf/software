@@ -47,6 +47,8 @@ public class MyApp {
     public boolean messageSentToSupplier;
      static  String loggedName;
     private String ROLE;
+    private String loggedPassword;
+    private ArrayList<Order> orders;
     private String currentPage;
     public boolean contentManagementPageOpen;
     private Order currentOrder;
@@ -86,7 +88,7 @@ public class MyApp {
                 }
             }
         } catch (IOException e) {
-     //       e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -435,7 +437,7 @@ public class MyApp {
             Files.write(Paths.get("files/products.txt"), updatedLines);
             System.out.println("File has been updated successfully.");
         } catch (IOException e) {
-      //      e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
