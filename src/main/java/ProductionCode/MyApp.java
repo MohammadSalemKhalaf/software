@@ -481,7 +481,7 @@ public class MyApp {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length == 3) {
-                    String purchasedName = parts[0];
+                 //   String purchasedName = parts[0];
                     String quan = parts[1];
                     String purchasedPrice = parts[2];
                     TotalSales += (Double.parseDouble(purchasedPrice) * Double.parseDouble(quan));
