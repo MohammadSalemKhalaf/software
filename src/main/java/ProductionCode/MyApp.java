@@ -88,7 +88,7 @@ public class MyApp {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+       //     e.printStackTrace();
         }
     }
 
