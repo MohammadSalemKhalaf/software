@@ -252,7 +252,7 @@ public class User {
             RecipeAddedSuccessfully=true;
         } catch (IOException e) {
             System.out.println("An error occurred while writing to the file.");
-            e.printStackTrace();
+   //         e.printStackTrace();
         }
     }
     
@@ -288,7 +288,7 @@ public class User {
             
         } catch (IOException e) {
             System.out.println("An error occurred while reading the file.");
-            e.printStackTrace();
+//            e.printStackTrace();
         }}
   
     public void filterRecipes(String ingredient) {
