@@ -16,7 +16,7 @@ public class MyApp {
     private static final String FILE_ADMIN = "files/admin.txt";
     private static final String FILE_PRODUCTS = "files/products.txt";
     private static final String FILE_ORDERS = "files/orders.txt";
-    private static final String printMessage ="Material_supplier";
+    private static final String PRINT_MESSAGE ="Material_supplier";
     // Instance variables
     private String filePath = "";
     public boolean isUserLoggedIn;
@@ -71,7 +71,7 @@ public class MyApp {
 
         loadData(FILE_USERS, "user");
         loadData(FILE_STORE_OWNERS, "Store_owner");
-        loadData(FILE_MATERIAL_SUPPLIERS, printMessage);
+        loadData(FILE_MATERIAL_SUPPLIERS, PRINT_MESSAGE);
         loadData(FILE_ADMIN, "Admin");
         loadProducts();
         loadOrders();
@@ -124,7 +124,7 @@ public class MyApp {
                 filePath = FILE_STORE_OWNERS;
                 store_owners.add(new StoreOwner(username, password));
                 break;
-            case printMessage:
+            case PRINT_MESSAGE:
                 filePath = FILE_MATERIAL_SUPPLIERS;
                 material_suppliers.add(new MaterialSupplier(username, password));
                 break;
@@ -186,7 +186,7 @@ public class MyApp {
             case "Store_owner":
                 found = loginStoreOwner(username, password);
                 break;
-            case printMessage:
+            case PRINT_MESSAGE:
                 found = loginMaterialSupplier(username, password);
                 break;
             case "Admin":
@@ -708,4 +708,3 @@ public class MyApp {
 		return loggedName;
 	}
 }
-
