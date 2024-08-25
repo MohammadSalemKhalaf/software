@@ -320,7 +320,7 @@ public class User {
             
         } catch (IOException e) {
             System.out.println("An error occurred while reading the file.");
-            e.printStackTrace();
+        //    e.printStackTrace();
         }
     }
 
