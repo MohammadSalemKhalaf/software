@@ -47,7 +47,6 @@ public class MyApp {
     public boolean messageSentToSupplier;
      static  String loggedName;
     private String ROLE;
-    private String loggedPassword;
     private ArrayList<Order> orders;
     private String currentPage;
     public boolean contentManagementPageOpen;
