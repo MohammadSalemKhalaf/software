@@ -47,7 +47,7 @@ public class MyApp {
     public boolean discountMessagepos;
     public boolean messageSentToUser;
     public boolean messageSentToSupplier;
-    public static String loggedName;
+     static  String loggedName;
     private String ROLE;
     private String loggedPassword;
     private ArrayList<Order> orders;
