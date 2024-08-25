@@ -73,7 +73,7 @@ public class MyApp {
         loadData(FILE_MATERIAL_SUPPLIERS, PRINT_MESSAGE);
         loadData(FILE_ADMIN, "Admin");
         loadProducts();
-        loadOrders();
+     //   loadOrders();
     }
 
     private void loadData(String fileName, String role) {
@@ -88,7 +88,7 @@ public class MyApp {
                 }
             }
         } catch (IOException e) {
-       //     e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -437,7 +437,7 @@ public class MyApp {
             Files.write(Paths.get("files/products.txt"), updatedLines);
             System.out.println("File has been updated successfully.");
         } catch (IOException e) {
-    //        e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -481,7 +481,7 @@ public class MyApp {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length == 3) {
-                 //   String purchasedName = parts[0];
+                  //  String purchasedName = parts[0];
                     String quan = parts[1];
                     String purchasedPrice = parts[2];
                     TotalSales += (Double.parseDouble(purchasedPrice) * Double.parseDouble(quan));
@@ -539,169 +539,169 @@ public class MyApp {
         }
     }
 
-    public void sendMessageToUser(String username, String message) {
-        String path = "files/messagesToSuppliers.txt";
-        String content = username + ", " + message;
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
-            writer.write(content);
-            writer.newLine();
-            System.out.println("Message sent successfully.");
-            messageSentToUser = true;
-        } catch (IOException e) {
-     //       e.printStackTrace();
-        }
-    }
-
-    public void sendMessageToSupplier(String supplierName, String message) {
-        String path = "files/messagesToUsers.txt";
-        String content = supplierName + ", " + message;
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
-            writer.write(content);
-            writer.newLine();
-            System.out.println("Message sent successfully.");
-            messageSentToSupplier = true;
-        } catch (IOException e) {
-     //       e.printStackTrace();
-        }
-    }
-
-    public void sendMessageToOwner(String ownerName, String message) {
-        String path = "files/messagesToOwner.txt";
-        String content = ownerName + ", " + message;
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
-            writer.write(content);
-            writer.newLine();
-            System.out.println("Message sent successfully.");
-            messageSentToSupplier = true;
-        } catch (IOException e) {
-  //          e.printStackTrace();
-        }
-    }
-
-    public void showAccountDetails() {
-        System.out.println("Account name: " + this.loggedName);
-        System.out.println("Account password: " + this.loggedPassword);
-        System.out.println("Account role: " + this.ROLE);
-    }
-
-    public void EditBusinessInformation(String op, String accName, String password) {
-        if (op.equals("Edit Business Information")) {
-            updateUser(loggedName, accName, password);
-        }
-    }
- 
-    public void listOrders() throws FileNotFoundException, IOException {
-        loadOrders();  // Ensure the latest orders are loaded from the file
-        System.out.println("Order List:");
-        for (Order order : orders) {
-            System.out.println(order.getOrderDetails());
-        }
-    }
-
-    public void processOrder(String oNum, String op) throws IOException {
-        for (Order order : orders) {
-            if (order.orderNum.equals(oNum)) {
-                if ("Process".equals(op)) {
-                    order.setStatus("processed");
-                } else {
-                    throw new IllegalArgumentException("Invalid operation");
-                }
-                break;
-            }
-        }
-        rewriteFile("files/orders.txt", orders);  // Update the orders in the file
-    }
-
-    public boolean isOrderStatusUpdated(String oNum, String expectedStatus) {
-        for (Order order : orders) {
-            if (order.orderNum.equals(oNum)) {
-                return order.getStatus().equals(expectedStatus);
-            }
-        }
-        return false;
-    }
-
-    private void loadOrders() throws FileNotFoundException, IOException {
-        orders.clear();  // Clear existing orders before loading new ones
-        try (BufferedReader br = new BufferedReader(new FileReader("files/orders.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 5) {
-                    String orderNum = parts[0];
-                    String storeOwner = parts[1];
-                    String receiver = parts[2];
-                    String productName = parts[3];
-                    String status = parts[4];
-                    Order order = new Order(orderNum, storeOwner, receiver, productName, status);
-                    orders.add(order);
-                }
-            }
-        }
-    }
-    public void selectOrderByNumber(String orderNum) {
-        for (Order order : orders) {
-            if (order.orderNum.equals(orderNum)) {
-                currentOrder = order;
-                break;
-            }
-        }
-        if (currentOrder == null) {
-            throw new AssertionError("Order with number " + orderNum + " not found.");
-        }
-    }
-
-    public String getCurrentOrderStatus() {
-        if (currentOrder != null) {
-            System.out.println("Current order status: " + currentOrder.getStatus());
-            return currentOrder.getStatus();
-        } else {
-            return null;
-        }
-    }
-    public void returnToManagementPage() {
-        navigateTo("order management page");
-    }
-
-    public boolean isOnPage(String page) {
-        return currentPage.equals(page);
-    }
-
-    public void selectReport(String profitReports) throws FileNotFoundException, IOException {
-        switch (profitReports) {
-            case "Profit Reports":
-                try (BufferedReader br = new BufferedReader(new FileReader("files/purchasedProducts.txt"))) {
-                    String line;
-                    double TotalSales = 0;
-                    double Profit = 0;
-                    int quantity = 0;
-                    while ((line = br.readLine()) != null) {
-                        String[] parts = line.split(",");
-                        if (parts.length == 3) {
-                            String purchasedName = parts[0];
-                            String quan = parts[1];
-                            String purchasedPrice = parts[2];
-                            TotalSales += (Double.parseDouble(purchasedPrice) * Double.parseDouble(quan));
-                            quantity += Double.parseDouble(quan);
-                        }
-                    }
-                    Profit = TotalSales - quantity * 50;
-                    System.out.println("The profit is: " + Profit);
-                    reportGenerated = true;
-                }
-                reportShown = true;
-                break;
-            case "Generate Financial Report":
-                this.getSalesReport();
-                break;
-            default:
-                System.err.println("Error: Unrecognized report type '" + profitReports + "'.");
-                break;
-        }
-    }
+//    public void sendMessageToUser(String username, String message) {
+//        String path = "files/messagesToSuppliers.txt";
+//        String content = username + ", " + message;
+//
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
+//            writer.write(content);
+//            writer.newLine();
+//            System.out.println("Message sent successfully.");
+//            messageSentToUser = true;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public void sendMessageToSupplier(String supplierName, String message) {
+//        String path = "files/messagesToUsers.txt";
+//        String content = supplierName + ", " + message;
+//
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
+//            writer.write(content);
+//            writer.newLine();
+//            System.out.println("Message sent successfully.");
+//            messageSentToSupplier = true;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public void sendMessageToOwner(String ownerName, String message) {
+//        String path = "files/messagesToOwner.txt";
+//        String content = ownerName + ", " + message;
+//
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
+//            writer.write(content);
+//            writer.newLine();
+//            System.out.println("Message sent successfully.");
+//            messageSentToSupplier = true;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public void showAccountDetails() {
+//        System.out.println("Account name: " + this.loggedName);
+//        System.out.println("Account password: " + this.loggedPassword);
+//        System.out.println("Account role: " + this.ROLE);
+//    }
+//
+//    public void EditBusinessInformation(String op, String accName, String password) {
+//        if (op.equals("Edit Business Information")) {
+//            updateUser(loggedName, accName, password);
+//        }
+//    }
+// 
+//    public void listOrders() throws FileNotFoundException, IOException {
+//        loadOrders();  // Ensure the latest orders are loaded from the file
+//        System.out.println("Order List:");
+//        for (Order order : orders) {
+//            System.out.println(order.getOrderDetails());
+//        }
+//    }
+//
+//    public void processOrder(String oNum, String op) throws IOException {
+//        for (Order order : orders) {
+//            if (order.orderNum.equals(oNum)) {
+//                if ("Process".equals(op)) {
+//                    order.setStatus("processed");
+//                } else {
+//                    throw new IllegalArgumentException("Invalid operation");
+//                }
+//                break;
+//            }
+//        }
+//        rewriteFile("files/orders.txt", orders);  // Update the orders in the file
+//    }
+//
+//    public boolean isOrderStatusUpdated(String oNum, String expectedStatus) {
+//        for (Order order : orders) {
+//            if (order.orderNum.equals(oNum)) {
+//                return order.getStatus().equals(expectedStatus);
+//            }
+//        }
+//        return false;
+//    }
+//
+//    private void loadOrders() throws FileNotFoundException, IOException {
+//        orders.clear();  // Clear existing orders before loading new ones
+//        try (BufferedReader br = new BufferedReader(new FileReader("files/orders.txt"))) {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                String[] parts = line.split(",");
+//                if (parts.length == 5) {
+//                    String orderNum = parts[0];
+//                    String storeOwner = parts[1];
+//                    String receiver = parts[2];
+//                    String productName = parts[3];
+//                    String status = parts[4];
+//                    Order order = new Order(orderNum, storeOwner, receiver, productName, status);
+//                    orders.add(order);
+//                }
+//            }
+//        }
+//    }
+//    public void selectOrderByNumber(String orderNum) {
+//        for (Order order : orders) {
+//            if (order.orderNum.equals(orderNum)) {
+//                currentOrder = order;
+//                break;
+//            }
+//        }
+//        if (currentOrder == null) {
+//            throw new AssertionError("Order with number " + orderNum + " not found.");
+//        }
+//    }
+//
+//    public String getCurrentOrderStatus() {
+//        if (currentOrder != null) {
+//            System.out.println("Current order status: " + currentOrder.getStatus());
+//            return currentOrder.getStatus();
+//        } else {
+//            return null;
+//        }
+//    }
+//    public void returnToManagementPage() {
+//        navigateTo("order management page");
+//    }
+//
+//    public boolean isOnPage(String page) {
+//        return currentPage.equals(page);
+//    }
+//
+//    public void selectReport(String profitReports) throws FileNotFoundException, IOException {
+//        switch (profitReports) {
+//            case "Profit Reports":
+//                try (BufferedReader br = new BufferedReader(new FileReader("files/purchasedProducts.txt"))) {
+//                    String line;
+//                    double TotalSales = 0;
+//                    double Profit = 0;
+//                    int quantity = 0;
+//                    while ((line = br.readLine()) != null) {
+//                        String[] parts = line.split(",");
+//                        if (parts.length == 3) {
+//                            String purchasedName = parts[0];
+//                            String quan = parts[1];
+//                            String purchasedPrice = parts[2];
+//                            TotalSales += (Double.parseDouble(purchasedPrice) * Double.parseDouble(quan));
+//                            quantity += Double.parseDouble(quan);
+//                        }
+//                    }
+//                    Profit = TotalSales - quantity * 50;
+//                    System.out.println("The profit is: " + Profit);
+//                    reportGenerated = true;
+//                }
+//                reportShown = true;
+//                break;
+//            case "Generate Financial Report":
+//                this.getSalesReport();
+//                break;
+//            default:
+//                System.err.println("Error: Unrecognized report type '" + profitReports + "'.");
+//                break;
+//        }
+//    }
 
 	public String getCurrentUsername() {
 		return loggedName;
