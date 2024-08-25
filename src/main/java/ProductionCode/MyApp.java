@@ -10,7 +10,6 @@ import java.util.List;
 public class MyApp {
 
     // Constants
-    private static final String MESSAGE_SENT_SUCCESSFULLY = "Message sent successfully.";
     private static final String FILE_USERS = "files/users.txt";
     private static final String FILE_STORE_OWNERS = "files/store_owners.txt";
     private static final String FILE_MATERIAL_SUPPLIERS = "files/material_suppliers.txt";
