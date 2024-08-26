@@ -33,12 +33,10 @@ public class MyApp {
     public boolean adminDashbordOpen;
     public boolean userManagementPageOpen;
     public boolean isUserListVisible;
-    public boolean addUserChoise;
     public boolean isSigndUp;
     public boolean addedSuccessfully;
     public boolean updatedSuccessfully;
     public boolean deletedSuccessfully;
-    private String ownerName;
     public boolean updateMessage;
     public boolean deletedProductSuccessfully;
     public boolean reportGenerated;
@@ -616,14 +614,7 @@ public class MyApp {
         rewriteFile("files/orders.txt", orders);  // Update the orders in the file
     }
 
-    public boolean isOrderStatusUpdated(String oNum, String expectedStatus) {
-        for (Order order : orders) {
-            if (order.orderNum.equals(oNum)) {
-                return order.getStatus().equals(expectedStatus);
-            }
-        }
-        return false;
-    }
+
 
     private void loadOrders() throws FileNotFoundException, IOException {
         orders.clear();  // Clear existing orders before loading new ones
