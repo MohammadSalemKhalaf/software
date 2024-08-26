@@ -16,6 +16,7 @@ public class MyApp {
     private static final String FILE_ADMIN = "files/admin.txt";
 
     private static final String PRINT_MESSAGE ="Material_supplier";
+    private final String storeOwner ="Store_owner";
     // Instance variables
     private String filePath = "";
     public boolean isUserLoggedIn;
@@ -67,7 +68,7 @@ public class MyApp {
         this.orders = new ArrayList<>();
 
         loadData(FILE_USERS, "user");
-        loadData(FILE_STORE_OWNERS, "Store_owner");
+        loadData(FILE_STORE_OWNERS,storeOwner);
         loadData(FILE_MATERIAL_SUPPLIERS, PRINT_MESSAGE);
         loadData(FILE_ADMIN, "Admin");
         loadProducts();
@@ -95,7 +96,7 @@ public class MyApp {
             case "user":
                 this.users.add(new User(name, password));
                 break;
-            case "Store_owner":
+            case storeOwner:
                 this.store_owners.add(new StoreOwner(name, password));
                 break;
             case "Material_supplier":
@@ -117,7 +118,7 @@ public class MyApp {
                 filePath = FILE_USERS;
                 users.add(new User(username, password));
                 break;
-            case "Store_owner":
+            case storeOwner:
                 filePath = FILE_STORE_OWNERS;
                 store_owners.add(new StoreOwner(username, password));
                 break;
@@ -180,7 +181,7 @@ public class MyApp {
             case "user":
                 found = loginUser(username, password);
                 break;
-            case "Store_owner":
+            case storeOwner:
                 found = loginStoreOwner(username, password);
                 break;
             case "Material_supplier":
