@@ -20,7 +20,7 @@ public class MyApp {
     private String filePath = "";
     public boolean isUserLoggedIn;
     public boolean isSignedUp;
-//    public ArrayList<User> users;
+    public ArrayList<User> users;
     public ArrayList<Admin> admin;
     public ArrayList<StoreOwner> store_owners;
     public ArrayList<MaterialSupplier> material_suppliers;
@@ -52,14 +52,14 @@ public class MyApp {
     private Order currentOrder;
     public boolean reportShown;
     public ContentManagement contentmanagement;
-//    public User user;
+    public User user;
 
     public MyApp() throws FileNotFoundException, IOException {
         super();
-//        this.user = new User();
-//        this.user.setApp(this);
+        this.user = new User();
+        this.user.setApp(this);
         contentmanagement = new ContentManagement();
-//        this.users = new ArrayList<>();
+        this.users = new ArrayList<>();
         this.store_owners = new ArrayList<>();
         this.material_suppliers = new ArrayList<>();
         this.admin = new ArrayList<>();
@@ -92,9 +92,9 @@ public class MyApp {
 
     private void addRole(String name, String password, String role) {
         switch (role) {
-//            case "user":
-//                this.users.add(new User(name, password));
-//                break;
+            case "user":
+                this.users.add(new User(name, password));
+                break;
             case "Store_owner":
                 this.store_owners.add(new StoreOwner(name, password));
                 break;
@@ -113,10 +113,10 @@ public class MyApp {
 
     public void SignUp(String username, String password, String role) {
         switch (role) {
-//            case "user":
-//                filePath = FILE_USERS;
-//                users.add(new User(username, password));
-//                break;
+            case "user":
+                filePath = FILE_USERS;
+                users.add(new User(username, password));
+                break;
             case "Store_owner":
                 filePath = FILE_STORE_OWNERS;
                 store_owners.add(new StoreOwner(username, password));
@@ -154,19 +154,19 @@ public class MyApp {
     private void rewriteFile(String filePath, ArrayList<?> list) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false))) {
             for (Object obj : list) {
-//                if (obj instanceof User) {
-//                    writer.write(((User) obj).getUsername() + "," + ((User) obj).getPassword());
-//                } else if (obj instanceof StoreOwner) {
-//                    writer.write(((StoreOwner) obj).getUsername() + "," + ((StoreOwner) obj).getPassword());
-//                } else if (obj instanceof MaterialSupplier) {
-//                    writer.write(((MaterialSupplier) obj).getUsername() + "," + ((MaterialSupplier) obj).getPassword());
-//                } else if (obj instanceof Admin) {
-//                    writer.write(((Admin) obj).getUsername() + "," + ((Admin) obj).getPassword());
-//                } else if (obj instanceof Product) {
-//                    writer.write(((Product) obj).getProductName() + "," + ((Product) obj).getPrice() + "," + ((Product) obj).getExpDate());
-//                } else if (obj instanceof Order) {
-//                    writer.write(((Order) obj).orderNum + "," + ((Order) obj).senderName + "," + ((Order) obj).reciver + "," + ((Order) obj).productName + "," + ((Order) obj).getStatus());
-//                }
+                if (obj instanceof User) {
+                    writer.write(((User) obj).getUsername() + "," + ((User) obj).getPassword());
+                } else if (obj instanceof StoreOwner) {
+                    writer.write(((StoreOwner) obj).getUsername() + "," + ((StoreOwner) obj).getPassword());
+                } else if (obj instanceof MaterialSupplier) {
+                    writer.write(((MaterialSupplier) obj).getUsername() + "," + ((MaterialSupplier) obj).getPassword());
+                } else if (obj instanceof Admin) {
+                    writer.write(((Admin) obj).getUsername() + "," + ((Admin) obj).getPassword());
+                } else if (obj instanceof Product) {
+                    writer.write(((Product) obj).getProductName() + "," + ((Product) obj).getPrice() + "," + ((Product) obj).getExpDate());
+                } else if (obj instanceof Order) {
+                    writer.write(((Order) obj).orderNum + "," + ((Order) obj).senderName + "," + ((Order) obj).reciver + "," + ((Order) obj).productName + "," + ((Order) obj).getStatus());
+                }
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -202,13 +202,13 @@ public class MyApp {
     }
 
     private boolean loginUser(String username, String password) {
-//        for (User a : users) {
-//            if (a.getUsername().equals(username) && a.getPassword().equals(password)) {
-//                isUserLoggedIn = true;
-//                UserLoggedIn = true;
-//                return true;
-//            }
-//        }
+        for (User a : users) {
+            if (a.getUsername().equals(username) && a.getPassword().equals(password)) {
+                isUserLoggedIn = true;
+                UserLoggedIn = true;
+                return true;
+            }
+        }
         return false;
     }
 
@@ -269,10 +269,10 @@ public class MyApp {
 
 
     public void viewAllUsers() {
-//        System.out.println("List of all users:");
-//        for (User user : users) {
-//            System.out.println("Username: " + user.getUsername());
-//        }
+        System.out.println("List of all users:");
+        for (User user : users) {
+            System.out.println("Username: " + user.getUsername());
+        }
         for (StoreOwner storeOwner : store_owners) {
             System.out.println("Store Owner: " + storeOwner.getUsername());
         }
@@ -290,12 +290,12 @@ public class MyApp {
     }
 
     public void deleteUser(String username) {
-//        users.removeIf(user -> user.getUsername().equals(username));
+        users.removeIf(user -> user.getUsername().equals(username));
         store_owners.removeIf(storeOwner -> storeOwner.getUsername().equals(username));
         material_suppliers.removeIf(supplier -> supplier.getUsername().equals(username));
         admin.removeIf(adminUser -> adminUser.getUsername().equals(username));
 
-//        rewriteFile("files/users.txt", users);
+        rewriteFile("files/users.txt", users);
         rewriteFile("files/store_owners.txt", store_owners);
         rewriteFile("files/material_suppliers.txt", material_suppliers);
         rewriteFile("files/admin.txt", admin);
@@ -307,18 +307,18 @@ public class MyApp {
     }
 
     public void updateUser(String oldUsername, String newUsername, String newPassword) {
-//        for (User user : users) {
-//            if (user.getUsername().equals(oldUsername)) {
-//                user.setUsername(newUsername);
-//                user.setPassword(newPassword);
-//                rewriteFile("files/users.txt", users);
-//                System.out.println("User updated successfully!");
-//                String message = "User updated successfully.";
-//                updatedSuccessfully = true;
-//                printMessage(message);
-//                return;
-//            }
-//        }
+        for (User user : users) {
+            if (user.getUsername().equals(oldUsername)) {
+                user.setUsername(newUsername);
+                user.setPassword(newPassword);
+                rewriteFile("files/users.txt", users);
+                System.out.println("User updated successfully!");
+                String message = "User updated successfully.";
+                updatedSuccessfully = true;
+                printMessage(message);
+                return;
+            }
+        }
         for (StoreOwner storeOwner : store_owners) {
             if (storeOwner.getUsername().equals(oldUsername)) {
                 storeOwner.setUsername(newUsername);
