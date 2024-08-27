@@ -75,16 +75,12 @@ public class UserAccountStep {
 //	}
 	@When("I choose to post a new dessert creation with name {string}, ingredients {string}")
 	public void i_choose_to_post_a_new_dessert_creation_with_name_ingredients(String string, String string2) {
-  //  app.user.PostAndSharePersonalDessert(string, string2);
-    assertTrue(true);
-
+    app.user.PostAndSharePersonalDessert(string, string2);
 	}
 	
 	@Then("the dessert creation should be shared successfully")
 	public void the_dessert_creation_should_be_shared_successfully() {
-   // assertTrue(app.user.RecipeAddedSuccessfully);
-    assertTrue(true);
-
+    assertTrue(app.user.RecipeAddedSuccessfully);
 	}
 
 	
